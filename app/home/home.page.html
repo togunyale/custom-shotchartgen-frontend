@@ -1,0 +1,41 @@
+<ion-header>
+    <ion-row>
+        <ion-searchbar (keyup.enter)="getSearchBarInput(searchbar.value)" #leagueSearch type="text" debounce="500"
+            [value]="selectedTeam" (ionChange)="getTeams($event)" (ionClear)="onCancel($event)">
+        </ion-searchbar>
+    </ion-row>
+    <ion-list class="search-queries" *ngIf="teamExist">
+        <ion-item lines="none" *ngFor="let team of teams" (click)="selectTeam(team)">{{ team }}</ion-item>
+    </ion-list>
+</ion-header>
+<ion-content>
+    <ion-grid>
+        <ion-row justify-content-end>
+            <ion-col padding size="4" align-self-stretch>
+                <ion-card class="side-panel">
+                    <ion-card-header>
+                        <img class="logo" src="{{teamLogo}}">
+                        <ion-card-title>
+                            {{selectedTeam}}
+                        </ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <chart-settings [selectedTeam]="selectedTeam" [selectedTeamDetails]="selectedTeamDetails">
+                        </chart-settings>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+            <ion-col size="8" class="main-col">
+                <ion-card class="main-panel">
+                    <ion-card-header>
+                    </ion-card-header>
+                    <ion-card-content>
+                        <shot-chart *ngIf="selectedTeamDetails && selectedTeam" [selectedTeam]="selectedTeam">
+                        </shot-chart>
+                        <ion-icon *ngIf="!selectedTeamDetails && !selectedTeam" name="stats-chart-outline"></ion-icon>
+                    </ion-card-content>
+                </ion-card>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>

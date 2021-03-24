@@ -1,0 +1,64 @@
+<ion-row>
+    <ion-label>
+        Shot Chart Subject(s)
+    </ion-label>
+</ion-row>
+<ion-row>
+    <ion-select [(ngModel)]="chartSubject" multiple="true" cancelText="Dismiss" okText="Confirm"
+        [disabled]="!selectedTeam">
+        <div *ngIf="selectedTeamDetails">
+            <ion-select-option *ngFor="let player of selectedTeamDetails.roster" [value]="player.playerId">
+                {{player.player}}
+            </ion-select-option>
+        </div>
+    </ion-select>
+</ion-row>
+<ion-row>
+    <ion-label>
+        Shot Type Area(s)
+    </ion-label>
+</ion-row>
+<ion-row>
+    <ion-select [(ngModel)]="chartShotType" multiple="true" cancelText="Dismiss" okText="Confirm"
+        [disabled]="!selectedTeam">
+        <div *ngIf="selectedTeamDetails">
+            <ion-select-option *ngFor="let shotType of shotTypes" [value]="shotType">
+                {{shotType}}
+            </ion-select-option>
+        </div>
+    </ion-select>
+</ion-row>
+<ion-row>
+    <ion-label>
+        Quarter(s) Represented
+    </ion-label>
+</ion-row>
+<ion-row>
+    <ion-select [(ngModel)]="chartQuarters" multiple="true" cancelText="Dismiss" okText="Confirm"
+        [disabled]="!selectedTeam">
+        <ion-select-option *ngFor="let qtr of quarters; let i = index" [value]="i+1">
+            {{qtr}}
+        </ion-select-option>
+    </ion-select>
+</ion-row>
+<ion-row>
+    <ion-label>
+        Time Interval in Minutes
+    </ion-label>
+</ion-row>
+<ion-row class="range-row">
+    <ion-range dualKnobs="true" [(ngModel)]="timeInterval" max="12" min="0" snaps="true" pin="true"
+        [disabled]="!selectedTeam">
+        <ion-label slot="start">
+            0 min
+        </ion-label>
+        <ion-label slot="end">
+            12 min
+        </ion-label>
+    </ion-range>
+</ion-row>
+<ion-row>
+    <ion-button [disabled]="!selectedTeam" (click)="makeChartQuery()">
+        Request
+    </ion-button>
+</ion-row>

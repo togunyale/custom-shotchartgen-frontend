@@ -1,0 +1,25 @@
+
+  
+  canvas{
+    display: block;
+    width: 891px;
+    height: 400px;
+    border-radius: 60px;
+    background-image: url("/assets/images/nba_court_2.jpeg");
+  }
+
+  ion-card{
+    border-radius: 60px;
+    --background:#212121;
+    ion-card-content{
+        ion-item{
+          --background:#212121;
+          ion-label{
+            --color: white;
+          }
+        }
+    }
+    ion-label{
+      --color:white;
+    }
+  }

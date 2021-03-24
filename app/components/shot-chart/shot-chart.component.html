@@ -1,0 +1,15 @@
+<div>
+    <canvas id="shotChart">{{ chart }}</canvas>
+</div>
+<ion-card *ngIf="selectedTeamShotChartDetails">
+    <ion-card-content>
+        <ion-item *ngFor="let stats of selectedTeamShotChartDetails.subjectAvgList; let i = index" lines="none">
+            <span>
+                <ion-label>
+                    {{returnChartDetailsSting(stats,i)}}
+                </ion-label>
+            </span>
+        </ion-item>
+    </ion-card-content>
+    <ion-label>*** League Averages incorporate the same paramters as the search ***</ion-label>
+</ion-card>

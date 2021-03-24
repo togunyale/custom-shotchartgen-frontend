@@ -1,0 +1,59 @@
+ion-header{
+  background: #212121;
+  margin: 0 auto;
+  
+  text-align:center;
+  ion-searchbar{
+    color: #121212;
+    margin: 0 auto;
+    width: 50%;
+    
+  }
+}
+
+ion-content{
+  margin: 0 auto;
+  --ion-text-color: #b3b3b3 !important;
+  --background: #121212;
+}
+
+ion-list.search-queries{
+position: absolute;
+width: inherit;
+background: #121212;
+ion-item{
+  --background: #212121;
+    --color: #b3b3b3;
+}
+}
+
+ion-card.side-panel{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-image: radial-gradient(circle, #212121, #121212, #1d1d1d, #282827, #333433);
+  border-radius: 60px;
+  display: flex;
+  flex-direction: column;
+  ion-card-header{
+    text-align: center;
+    ion-card-title{
+      --color:white;
+    }
+  }
+}
+
+ion-col.main-col{
+  margin: auto 0;
+}
+ion-card.main-panel{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background:#212121;
+  border-radius: 60px;
+  text-align: center;
+}
+
+[name=stats-chart-outline]{
+  font-size: 19.58em;
+}
+[name=close]{
+font-size: 2em;
+}
