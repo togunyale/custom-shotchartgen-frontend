@@ -8,6 +8,8 @@ import { HomePageRoutingModule } from './home-routing.module';
 import { NbaApiService } from '../services/nba-api.services';
 import { ShotChartComponent } from '../components/shot-chart/shot-chart.component';
 import { ChartSettingsComponent } from '../components/chart-settings/chart-settings.component';
+import { SecondaryService } from '../services/secondary.service';
+import { HelpPageComponent } from '../components/help-page/help-page.component';
 
 
 @NgModule({
@@ -17,7 +19,7 @@ import { ChartSettingsComponent } from '../components/chart-settings/chart-setti
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, ShotChartComponent, ChartSettingsComponent],
-  providers: [NbaApiService]
+  declarations: [HomePage, ShotChartComponent, ChartSettingsComponent, HelpPageComponent],
+  providers: [NbaApiService, SecondaryService]
 })
 export class HomePageModule { }

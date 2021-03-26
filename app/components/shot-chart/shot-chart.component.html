@@ -3,7 +3,7 @@
 </div>
 <ion-card *ngIf="selectedTeamShotChartDetails">
     <ion-card-content>
-        <ion-item *ngFor="let stats of selectedTeamShotChartDetails.subjectAvgList; let i = index" lines="none">
+        <ion-item *ngFor="let stats of selectedTeamShotChartDetails.leagueAvgList; let i = index" lines="none">
             <span>
                 <ion-label>
                     {{returnChartDetailsSting(stats,i)}}

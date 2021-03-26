@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
-import { IonSearchbar, LoadingController } from '@ionic/angular';
+import { IonSearchbar } from '@ionic/angular';
 import { NbaApiService } from '../services/nba-api.services';
+import { SecondaryService } from '../services/secondary.service';
 import { LEAGUE } from '../shared/interface';
 import { TeamDetails } from '../shared/team-data';
 
@@ -18,7 +19,7 @@ export class HomePage {
   teamLogo: string = '/assets/images/NBA.svg';
   selectedTeamDetails: TeamDetails;
 
-  constructor(private apiService: NbaApiService, private loadingController: LoadingController) { }
+  constructor(private apiService: NbaApiService, private secondaryService: SecondaryService) { }
   initializeTeams() {
     this.teams = Object.values(LEAGUE);
   }
@@ -50,13 +51,13 @@ export class HomePage {
       this.teams = [];
       this.teamExist = false;
       this.ignoreNextChange = true;
-      this.presentLoading();
+      this.secondaryService.presentLoading("Loading Team Data");
       this.apiService.notifyResetOfChartSettings();
       this.apiService.getTeamDetails(team).subscribe(res => {
         this.selectedTeamDetails = new TeamDetails(res);
         this.selectedTeam = team;
         this.teamLogo = this.getTeamLogo();
-        this.loadingController.dismiss();
+        this.secondaryService.dismissLoadingNotice();
       });
     }
   }
@@ -83,11 +84,7 @@ export class HomePage {
 
   }
 
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Loading Team Data ...',
-      translucent: true,
-    });
-    return await loading.present();
+  presentHelpModal() {
+    this.secondaryService.presentHelpModal();
   }
 }

@@ -1,8 +1,8 @@
 import { Component, Input, OnInit } from "@angular/core";
-import { AlertController, LoadingController, ToastController } from "@ionic/angular";
 import { NbaApiService } from "src/app/services/nba-api.services";
 import { TeamDetails } from "src/app/shared/team-data";
 import { Quarters, Shot_Zones } from "src/app/shared/interface";
+import { SecondaryService } from "src/app/services/secondary.service";
 
 @Component({
     selector: 'chart-settings',
@@ -24,8 +24,7 @@ export class ChartSettingsComponent implements OnInit {
     querySubmitError: string = '';
 
 
-    constructor(private apiService: NbaApiService, private loadingController: LoadingController, private alertController: AlertController,
-        private toastController: ToastController) {
+    constructor(private apiService: NbaApiService, private secondaryService: SecondaryService) {
         this.shotTypes = Object.values(Shot_Zones);
         this.quarters = Quarters;
     }
@@ -52,33 +51,12 @@ export class ChartSettingsComponent implements OnInit {
             this.apiService.notifyChartOfRequest(this.shotChartDetailsPayLoad())
         } else {
             this.allParametersChecked();
-            this.presentToast();
+            this.secondaryService.presentErrorToast(this.querySubmitError);
             this.querySubmitError = '';
         }
 
 
     }
-
-    async presentLoading() {
-        const loading = await this.loadingController.create({
-            message: 'Loading Team Data ...',
-            translucent: true,
-        });
-        return await loading.present();
-    }
-
-    async presentToast() {
-        const toast = await this.toastController.create({
-            message: this.querySubmitError,
-            duration: 2000,
-            color: 'danger',
-            position: 'top',
-            cssClass: "error-msg",
-            header: "Query Submission Error:"
-        });
-        toast.present();
-    }
-
 
     checkIfQtrsSelected(): boolean {
         return this.chartQuarters && this.chartQuarters.length != 0 ? true : false;

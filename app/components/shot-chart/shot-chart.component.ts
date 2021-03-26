@@ -7,6 +7,7 @@ import { ShotChartDetails, ShotCords } from "src/app/shared/shotdata";
 import { TeamDetails } from "src/app/shared/team-data";
 import { Shot_Zones, teamColorSchemes } from "src/app/shared/interface";
 import { scales } from "src/app/shared/chart-config";
+import { SecondaryService } from "src/app/services/secondary.service";
 
 @Component({
     selector: 'shot-chart',
@@ -29,18 +30,18 @@ export class ShotChartComponent implements OnInit {
     ctx: string = 'shotChart';
 
 
-    constructor(private apiService: NbaApiService, private loadingController: LoadingController) {
+    constructor(private apiService: NbaApiService, private secondaryService: SecondaryService) {
         let namedChartAnnotation = ChartAnnotation;
         namedChartAnnotation["id"] = "annotation";
         Chart.pluginService.register(namedChartAnnotation);
     }
     ngOnInit(): void {
         this.apiService.requestSent.subscribe(request => {
-            this.presentLoading();
+            this.secondaryService.presentLoading("Creating Shot Chart");
             this.apiService.getShotChartDetails(request).subscribe(data => {
                 this.selectedTeamShotChartDetails = new ShotChartDetails(data);
                 this.extractShotData();
-                this.loadingController.dismiss();
+                this.secondaryService.dismissLoadingNotice();
             })
         })
         this.chart = new Chart(this.ctx, {
@@ -172,13 +173,6 @@ export class ShotChartComponent implements OnInit {
         this.chart.data.datasets[1].pointRadius = 6;
         this.chart.data.datasets[1].borderColor = 'black';
     }
-    async presentLoading() {
-        const loading = await this.loadingController.create({
-            message: 'Creating Shot Chart ...',
-            translucent: true,
-        });
-        return await loading.present();
-    }
 
     nextStat() {
         !this.slides.isEnd()
@@ -186,14 +180,14 @@ export class ShotChartComponent implements OnInit {
     }
 
     returnChartDetailsSting(stat: any, i) {
-        return `${stat.shotZone}: Chart Subject(s) shooting ${stat.shotZoneAvg}% compared to League Average of ${this.getShotZoneLeagueAvg(stat.shotZone)}%`
+        return `${stat.shotZone}: Chart Subject(s) shooting ${this.getShotZoneSubject(stat.shotZone)} compared to League Average of ${stat.shotZoneAvg}%`
     }
 
-    getShotZoneLeagueAvg(shotZone) {
-        let avg = "0";
-        this.selectedTeamShotChartDetails.leagueAvgList.forEach(value => {
+    getShotZoneSubject(shotZone) {
+        let avg = "n/a";
+        this.selectedTeamShotChartDetails.subjectAvgList.forEach(value => {
             if (value.shotZone == shotZone) {
-                avg = value.shotZoneAvg;
+                avg = `${value.shotZoneAvg}%`;
             }
         })
         return avg;

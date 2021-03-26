@@ -1,0 +1,25 @@
+ion-content{
+    --background:#121212;
+}
+
+ion-row >ion-label{
+    justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  color: white;
+  }
+
+  ion-row >ion-img{
+    justify-content: center;
+  margin: 0 auto;
+  margin-bottom: 10px;
+  }
+  ion-header{
+      background:#212121;
+      margin: 0 auto;
+      ion-icon{
+        color:white;
+        font-size: 24px;
+        margin-left: auto;
+      }
+  }
