@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { IonSearchbar } from '@ionic/angular';
 import { NbaApiService } from '../services/nba-api.services';
 import { SecondaryService } from '../services/secondary.service';
@@ -19,7 +19,7 @@ export class HomePage {
   teamLogo: string = '/assets/images/NBA.svg';
   selectedTeamDetails: TeamDetails;
 
-  constructor(private apiService: NbaApiService, private secondaryService: SecondaryService) { }
+  constructor(private apiService: NbaApiService, private secondaryService: SecondaryService, private cd: ChangeDetectorRef) { }
   initializeTeams() {
     this.teams = Object.values(LEAGUE);
   }
@@ -50,6 +50,7 @@ export class HomePage {
       this.selectedTeam = "";
       this.teams = [];
       this.teamExist = false;
+      this.cd.detectChanges();
       this.ignoreNextChange = true;
       this.secondaryService.presentLoading("Loading Team Data");
       this.apiService.notifyResetOfChartSettings();
@@ -64,6 +65,7 @@ export class HomePage {
   onCancel($event) {
     this.ignoreNextChange = false;
     this.teamExist = true;
+    this.cd.detectChanges();
   }
 
 
