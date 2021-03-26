@@ -10,6 +10,7 @@ import { ShotChartComponent } from '../components/shot-chart/shot-chart.componen
 import { ChartSettingsComponent } from '../components/chart-settings/chart-settings.component';
 import { SecondaryService } from '../services/secondary.service';
 import { HelpPageComponent } from '../components/help-page/help-page.component';
+import { RecentSearchComponent } from '../components/recent-search/recent-search.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HelpPageComponent } from '../components/help-page/help-page.component';
     IonicModule,
     HomePageRoutingModule
   ],
-  declarations: [HomePage, ShotChartComponent, ChartSettingsComponent, HelpPageComponent],
+  declarations: [HomePage, ShotChartComponent, ChartSettingsComponent, HelpPageComponent,
+    RecentSearchComponent],
   providers: [NbaApiService, SecondaryService]
 })
 export class HomePageModule { }

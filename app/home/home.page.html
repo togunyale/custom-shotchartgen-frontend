@@ -4,6 +4,7 @@
             [value]="selectedTeam" (ionChange)="getTeams($event)" (ionClear)="onCancel($event)"
             placeholder="Search NBA Teams">
         </ion-searchbar>
+        <ion-icon name="bookmark-outline" (click)="presentPastInquiriesModal()"></ion-icon>
         <ion-icon name="help-circle-outline" (click)="presentHelpModal()"></ion-icon>
     </ion-row>
     <ion-list class="search-queries" *ngIf="teamExist">

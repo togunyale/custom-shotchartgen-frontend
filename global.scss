@@ -64,3 +64,12 @@ ion-searchbar{
     color:white;
 }
 
+ion-backdrop {
+--backdrop-opacity: 0;
+
+}
+
+.modal-wrapper.ion-overlay-wrapper.sc-ion-modal-md{
+    --border-radius: 15px;
+  }
+

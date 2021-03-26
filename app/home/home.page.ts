@@ -87,4 +87,8 @@ export class HomePage {
   presentHelpModal() {
     this.secondaryService.presentHelpModal();
   }
+
+  presentPastInquiriesModal() {
+    this.secondaryService.presentPastInquiriesModal();
+  }
 }

@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { LoadingController, ModalController, ToastController } from "@ionic/angular";
 import { HelpPageComponent } from "../components/help-page/help-page.component";
+import { RecentSearchComponent } from "../components/recent-search/recent-search.component";
 // import { HelpPageComponent } from "../components/help-page/help-page.component";
 
 @Injectable()
@@ -34,6 +35,13 @@ export class SecondaryService {
     async presentHelpModal() {
         const modal = await this.modalController.create({
             component: HelpPageComponent
+        });
+        return await modal.present();
+    }
+
+    async presentPastInquiriesModal() {
+        const modal = await this.modalController.create({
+            component: RecentSearchComponent
         });
         return await modal.present();
     }
